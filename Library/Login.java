@@ -4,9 +4,6 @@ import java.awt.Font;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.Arrays;
-import javax.imageio.*;
-
-
 
 
 public class Login {
@@ -17,12 +14,9 @@ public class Login {
     private JButton btnEntrar;
     private JLabel lblRegistrar;
     private JLabel lblFechar;
-    private JPanel imgLogin;
-    private JLabel tituloLogin;
     private JLabel labelLogin;
     private JLabel labelSenha;
     private JLabel labelLogo;
-    private JLabel txtlogo;
 
     public Login(){
         configurarJanela();
@@ -95,8 +89,8 @@ public class Login {
 
         labelLogin.setIcon(new ImageIcon(this.getClass().getResource("LoginIcone.png")));
         labelSenha.setIcon(new ImageIcon(this.getClass().getResource("SenhaIcone.png"))); 
-        labelLogo.setIcon(new ImageIcon(this.getClass().getResource("Logo1.png")));
-        lblFechar.setIcon(new ImageIcon(this.getClass().getResource("Botao.png")));
+        labelLogo.setIcon(new ImageIcon(this.getClass().getResource("BibliotecaIcone.png")));
+        lblFechar.setIcon(new ImageIcon(this.getClass().getResource("BotaoFechar.png")));
         
         labelLogin.setBounds(617, 150, 30, 30);
         labelSenha.setBounds(617, 200, 30, 30);

@@ -16,11 +16,14 @@ public class Login {
     private JPasswordField txtSenha;
     private JButton btnEntrar;
     private JLabel lblRegistrar;
+    private JLabel lblFechar;
     private JPanel imgLogin;
     private JLabel tituloLogin;
     private JLabel labelLogin;
     private JLabel labelSenha;
-    
+    private JLabel labelLogo;
+    private JLabel txtlogo;
+
     public Login(){
         configurarJanela();
         inicializar();
@@ -50,7 +53,7 @@ public class Login {
     }
 
     private void definirComponentes(){
-    
+        JLabel txtlogo = new JLabel("BEM VINDO!");
         JLabel lblLogin = new JLabel("Login:");
         JLabel lblSenha = new JLabel("Senha:");
         JLabel tituloLogin = new JLabel("LOGIN");
@@ -60,8 +63,11 @@ public class Login {
         lblSenha.setBounds(10, 60, 60, 50);
         lblSenha.setFont(new Font("", Font.BOLD, 15));
         tituloLogin.setBounds(440, 40, 300, 65);
-        tituloLogin.setFont(new Font("Courier",Font.BOLD, 45));
+        tituloLogin.setFont(new Font("",Font.BOLD, 45));
         tituloLogin.setForeground(Color.decode("#3CC3BE"));
+        txtlogo.setBounds(70, 370, 300, 50);
+        txtlogo.setFont(new Font("", Font.BOLD, 30));
+        txtlogo.setForeground(Color.decode("#FFFFFF"));
         txtLogin = new JTextField("");
         txtSenha = new JPasswordField("");
         txtLogin.setBounds(412, 150, 200, 30);
@@ -71,6 +77,8 @@ public class Login {
         definirBotao();
         carrgarImagens();
         definirLabelRegistrar();
+        definirButaoFechar();
+        this.panel.add(txtlogo);
         this.panel.add(tituloLogin);
         this.panel.add(imgLogin);
         this.panel.add(lblLogin);
@@ -82,17 +90,36 @@ public class Login {
         
         labelSenha = new JLabel(); 
         labelLogin = new JLabel();
-        
-        labelLogin.setIcon(new ImageIcon(this.getClass().getResource("Login1.png")));
-        labelSenha.setIcon(new ImageIcon(this.getClass().getResource("Senha1.png"))); 
+        labelLogo = new JLabel();
+        lblFechar = new JLabel();
+
+        labelLogin.setIcon(new ImageIcon(this.getClass().getResource("LoginIcone.png")));
+        labelSenha.setIcon(new ImageIcon(this.getClass().getResource("SenhaIcone.png"))); 
+        labelLogo.setIcon(new ImageIcon(this.getClass().getResource("Logo1.png")));
+        lblFechar.setIcon(new ImageIcon(this.getClass().getResource("Botao.png")));
         
         labelLogin.setBounds(617, 150, 30, 30);
         labelSenha.setBounds(617, 200, 30, 30);
-        
+        labelLogo.setBounds(12, 50, 300, 300);
+        lblFechar.setBounds(670, 10, 20, 20);
+
+        this.panel.add(lblFechar);
+        this.panel.add(labelLogo);        
         this.panel.add(labelSenha);
         this.panel.add(labelLogin);
     }
+    private void definirButaoFechar(){
+        
+        lblFechar.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                frame.dispose();
+                
+            }
+        });
 
+
+    }
 
     private void definirLabelRegistrar(){
         lblRegistrar = new JLabel("Não Possui uma Conta? Clique Aqui!");

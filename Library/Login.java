@@ -83,8 +83,8 @@ public class Login {
         labelSenha = new JLabel(); 
         labelLogin = new JLabel();
         
-        labelLogin.setIcon(new ImageIcon(this.getClass().getResource("Login1.png")));
-        labelSenha.setIcon(new ImageIcon(this.getClass().getResource("Senha1.png"))); 
+        labelLogin.setIcon(new ImageIcon(this.getClass().getResource("LoginIcone.png")));
+        labelSenha.setIcon(new ImageIcon(this.getClass().getResource("SenhaIcone.png"))); 
         
         labelLogin.setBounds(617, 150, 30, 30);
         labelSenha.setBounds(617, 200, 30, 30);

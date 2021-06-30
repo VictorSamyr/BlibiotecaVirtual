@@ -93,8 +93,8 @@ public class Login {
         labelLogo = new JLabel();
         lblFechar = new JLabel();
 
-        labelLogin.setIcon(new ImageIcon(this.getClass().getResource("Login1.png")));
-        labelSenha.setIcon(new ImageIcon(this.getClass().getResource("Senha1.png"))); 
+        labelLogin.setIcon(new ImageIcon(this.getClass().getResource("LoginIcone.png")));
+        labelSenha.setIcon(new ImageIcon(this.getClass().getResource("SenhaIcone.png"))); 
         labelLogo.setIcon(new ImageIcon(this.getClass().getResource("Logo1.png")));
         lblFechar.setIcon(new ImageIcon(this.getClass().getResource("Botao.png")));
         

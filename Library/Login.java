@@ -4,6 +4,9 @@ import java.awt.Font;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.Arrays;
+import javax.imageio.*;
+
+
 
 
 public class Login {
@@ -14,10 +17,13 @@ public class Login {
     private JButton btnEntrar;
     private JLabel lblRegistrar;
     private JLabel lblFechar;
+    private JPanel imgLogin;
+    private JLabel tituloLogin;
     private JLabel labelLogin;
     private JLabel labelSenha;
     private JLabel labelLogo;
-
+    private JLabel txtlogo;
+    
     public Login(){
         configurarJanela();
         inicializar();
@@ -38,6 +44,7 @@ public class Login {
 
     private void inicializar(){
         panel = new JPanel();
+        panel.setBackground(Color.decode("#FFFFFF"));
         // Optamos por não usar nem um layout manager, pois nos dá mais liberdade e
         // agilidade ao inserir componentes
         panel.setLayout(null);
@@ -72,6 +79,7 @@ public class Login {
         carrgarImagens();
         definirLabelRegistrar();
         definirButaoFechar();
+    
         this.panel.add(txtlogo);
         this.panel.add(tituloLogin);
         this.panel.add(imgLogin);

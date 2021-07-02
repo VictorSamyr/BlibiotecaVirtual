@@ -1,10 +1,8 @@
-import java.util.Calendar;
-
 public class Livro {
 
     private int idLivro;
     private String genero;
-    private Calendar anoLancamento;
+    private int anoLancamento;
     private int isbn;
     private String sinopse;
     private String autor;
@@ -32,11 +30,11 @@ public class Livro {
     }
 
     // Ano de lançamento
-    public Calendar getAnoLancamento() {
+    public int getAnoLancamento() {
         return anoLancamento;
     }
 
-    public void setAnoLancamento(Calendar novoAnoLancamento) {
+    public void setAnoLancamento(int novoAnoLancamento) {
         this.anoLancamento = novoAnoLancamento;
     }
 

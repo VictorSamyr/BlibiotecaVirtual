@@ -16,12 +16,8 @@ public class Registro{
     private JTextField txtIdade;
     private JComboBox<String> sexo;
     private JButton btnRegistrar;
-    private JPanel fundoAzul;
-    private JLabel txtRegistro;
     private JLabel lblFechar;
     private JLabel lblLogo;
-    private JLabel txtlogo;
-    private JLabel lblEmail;
     private JTextField txtEmail;
 
     public Registro(){
@@ -241,6 +237,11 @@ public class Registro{
         // Checa se a senha e a confirmação da senha coincidem
         if (!Arrays.equals(senha, senhaConfirmada)){
             JOptionPane.showMessageDialog(null,"As Senhas Não São Iguais",
+            "ERRO!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (senha.length < 5){
+            JOptionPane.showMessageDialog(null,"A senha deve ter no mínimo 5 caracteres",
             "ERRO!", JOptionPane.ERROR_MESSAGE);
             return;
         }

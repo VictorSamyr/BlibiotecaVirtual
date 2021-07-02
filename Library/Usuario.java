@@ -2,10 +2,10 @@ public class Usuario {
 
     private int idUsuario;
     private String nome;
-    private char sexo;
+    private String sexo;
     private String email;
     private int idade;
-    private String preferencia;
+    private String[] preferencia;
     private String senha;
 
     //Gets e Sets
@@ -20,46 +20,46 @@ public class Usuario {
     }
 
     //Nome
-    public String getnome() {
+    public String getNome() {
         return this.nome;
     }
 
-    public void setnome(String novoNome) {
+    public void setNome(String novoNome) {
         this.nome = novoNome;
     }
 
     //Sexo
-    public char getsexo(){
+    public String getSexo(){
         return this.sexo;
     }
 
-    public void setsexo(char novoSexo){
+    public void setSexo(String novoSexo){
         this.sexo = novoSexo;
     }
     //E-mail
-    public String getemail(){
+    public String getEmail(){
         return this.email;
     }
 
-    public void setemail(String novoEmail){
+    public void setEmail(String novoEmail){
         this.email = novoEmail;
     }
 
     //Idade
-    public int getidade(){
+    public int getIdade(){
         return this.idade;
     }
 
-    public void setidade(int novaIdade){
+    public void setIdade(int novaIdade){
         this.idade = novaIdade;
     }
 
     //Preferência
-    public String getPreferencia(){
+    public String[] getPreferencia(){
         return this.preferencia;
     }
 
-    public void setPreferencia(String novaPreferencia){
+    public void setPreferencia(String[] novaPreferencia){
         this.preferencia = novaPreferencia;
     }
 

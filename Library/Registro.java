@@ -21,6 +21,8 @@ public class Registro{
     private JLabel lblFechar;
     private JLabel lblLogo;
     private JLabel txtlogo;
+    private JLabel lblEmail;
+    private JTextField txtEmail;
 
     public Registro(){
         prepararJanela();
@@ -53,6 +55,7 @@ public class Registro{
     }
 
     private void colocarComponentes(){
+        JLabel lblEmail = new JLabel("E-mail");
         JLabel txtlogo = new JLabel("BEM VINDO!");
         JLabel txtRegistro = new JLabel("REGISTRO");
         JPanel fundoAzul = new JPanel();
@@ -60,10 +63,12 @@ public class Registro{
         JLabel lblSenha = new JLabel("Senha");
         JLabel lblConfirmarSenha = new JLabel("Confirmar Senha");
         JLabel lblNome = new JLabel("Nome");
+        lblEmail.setForeground(Color.decode("#3CC3BE"));
         lblLogin.setForeground(Color.decode("#3CC3BE"));
         lblSenha.setForeground(Color.decode("#3CC3BE"));
         lblNome.setForeground(Color.decode("#3CC3BE"));
         lblConfirmarSenha.setForeground(Color.decode("#3CC3BE"));
+        lblEmail.setBounds(410, 130, 50, 50);
         txtRegistro.setBackground(Color.decode("#3cc3be"));
         txtRegistro.setBounds(395, 40, 300, 65);
         txtRegistro.setFont(new Font("",Font.BOLD, 45));
@@ -74,16 +79,18 @@ public class Registro{
         fundoAzul.setBackground(Color.decode("#3cc3be"));
         fundoAzul.setBounds(0, 0, 325, 450);
         lblNome.setBounds(410, 85, 50, 50);
-        lblLogin.setBounds(410, 130, 50, 50);
+        lblLogin.setBounds(520, 85, 50, 50);
         lblSenha.setBounds(410, 175,  50, 50);
         lblConfirmarSenha.setBounds(410, 220, 100, 50);
+        txtEmail = new JTextField();
         txtNome = new JTextField();
         txtLogin = new JTextField();
         txtSenha = new JPasswordField();
         txtConfirmarSenha = new JPasswordField();
-        txtNome.setBounds(410, 120, 200, 25);
-        txtLogin.setBounds(410, 165, 200, 25);
+        txtNome.setBounds(410, 120, 90, 25);
+        txtLogin.setBounds(520, 120, 90, 25);
         txtSenha.setBounds(410, 210, 200, 25);
+        txtEmail.setBounds(410, 165, 200, 25);
         txtConfirmarSenha.setBounds(410, 255, 200, 25);
         carrgarImagens();
         definirCampoIdade();
@@ -91,6 +98,8 @@ public class Registro{
         definirCampoGeneros();
         definirBotao();
         definirButaoFechar();
+        this.panel.add(txtEmail);
+        this.panel.add(lblEmail);
         this.panel.add(txtlogo);
         this.panel.add(txtRegistro);
         this.panel.add(fundoAzul);

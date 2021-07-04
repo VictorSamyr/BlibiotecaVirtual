@@ -172,8 +172,8 @@ public class Registro{
     private void definirCampoGeneros(){
         JCheckBox ficcaoCientifica = new JCheckBox("Ficção Científica");
         JCheckBox romance = new JCheckBox("Romance");
-        JCheckBox autoAjuda = new JCheckBox("Auto Ajuda");
-        JCheckBox historiaEmQuadrinhos = new JCheckBox("Historia em quadrinhos");
+        JCheckBox autoAjuda = new JCheckBox("Auto-Ajuda");
+        JCheckBox historiaEmQuadrinhos = new JCheckBox("História em quadrinhos");
         JCheckBox suspense = new JCheckBox("Suspense");
         JLabel lblGeneros = new JLabel("Gêneros Favoritos");
         lblGeneros.setBounds(410, 300, 150, 50);
@@ -273,13 +273,15 @@ public class Registro{
         UsuarioDao userdao = new UsuarioDao();
         String comando = "SELECT * FROM usuario WHERE login = '" + login + "'";
         List<Usuario> users = userdao.getUsuarios(comando);
-        return users.size() > 1;
+        return users.size() < 1;
     }
     
     public void registrarUsuario(){
         UsuarioDao userDao = new UsuarioDao();
         Usuario user = new Usuario();
         user.setNome(this.txtNome.getText());
+        user.setLogin(this.txtLogin.getText(
+        ));
         String sexo = this.sexo.getSelectedItem().toString();
         if (sexo == "Masculino"){
             sexo = "M";

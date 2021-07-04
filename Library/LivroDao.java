@@ -6,6 +6,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+
 public class LivroDao {
     private Connection connection;
 
@@ -14,8 +20,8 @@ public class LivroDao {
     }
 
     public void adiciona(Livro livro){
-        String comando = "INSERT INTO livro(genero, ano_lancamento, isbn, sinopse, autor)"
-                       + "VALUES(?, ?, ?, ?, ?)";
+        String comando = "INSERT INTO livro(genero, ano_lancamento, isbn, sinopse, autor, imagem)"
+                       + "VALUES(?, ?, ?, ?, ?, ?)";
         try
         {
             PreparedStatement stmt = this.connection.prepareStatement(comando);
@@ -48,6 +54,9 @@ public class LivroDao {
                 livro.setIsbn(rs.getInt("isbn"));
                 livro.setSinopse(rs.getString("sinopse"));
                 livro.setAutor(rs.getString("autor"));
+                InputStream is = rs.getBinaryStream("imagem");
+                BufferedImage img = ImageIO.read(is);
+                livro.setImagem(img);
                 livros.add(livro);
             }
             rs.close();
@@ -56,6 +65,8 @@ public class LivroDao {
         }
         catch (SQLException e)
         {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }

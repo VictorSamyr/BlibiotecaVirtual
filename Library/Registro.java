@@ -245,6 +245,11 @@ public class Registro{
                 "ERRO!", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if (!loginValido()){
+            JOptionPane.showMessageDialog(null,"Este Login Já Foi Registrado",
+            "ERRO!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         // Checa se a senha e a confirmação da senha coincidem
         if (!Arrays.equals(senha, senhaConfirmada)){
             JOptionPane.showMessageDialog(null,"As Senhas Não São Iguais",
@@ -261,6 +266,14 @@ public class Registro{
         "Registrado com sucesso!", "Registrado!", JOptionPane.INFORMATION_MESSAGE);
         this.frame.dispose();
         new Login();
+    }
+
+    public boolean loginValido(){
+        String login = this.txtLogin.getText();
+        UsuarioDao userdao = new UsuarioDao();
+        String comando = "SELECT * FROM usuario WHERE login = '" + login + "'";
+        List<Usuario> users = userdao.getUsuarios(comando);
+        return users.size() > 1;
     }
     
     public void registrarUsuario(){
@@ -290,7 +303,6 @@ public class Registro{
         String senhaSHA = GeradorSHA256.getSHA256(senha);
         user.setSenha(senhaSHA);
         userDao.adiciona(user);
-        System.out.println("Funcionou porra!!!");
     }
 
 }

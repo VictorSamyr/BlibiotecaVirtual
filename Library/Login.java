@@ -4,6 +4,7 @@ import java.awt.Font;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.Arrays;
+import javax.imageio.*;
 
 
 
@@ -16,9 +17,12 @@ public class Login {
     private JButton btnEntrar;
     private JLabel lblRegistrar;
     private JLabel lblFechar;
+    private JPanel imgLogin;
+    private JLabel tituloLogin;
     private JLabel labelLogin;
     private JLabel labelSenha;
     private JLabel labelLogo;
+    private JLabel txtlogo;
     
     public Login(){
         configurarJanela();
@@ -93,7 +97,7 @@ public class Login {
 
         labelLogin.setIcon(new ImageIcon(this.getClass().getResource("LoginIcone.png")));
         labelSenha.setIcon(new ImageIcon(this.getClass().getResource("SenhaIcone.png"))); 
-        labelLogo.setIcon(new ImageIcon(this.getClass().getResource("BibliotecaIcone.png")));
+        labelLogo.setIcon(new ImageIcon(this.getClass().getResource("BibliotecaIconeRegistro&Login.png")));
         lblFechar.setIcon(new ImageIcon(this.getClass().getResource("BotaoFechar.png")));
         
         labelLogin.setBounds(617, 150, 30, 30);
@@ -126,7 +130,7 @@ public class Login {
         // Quando a label é clicada a janela atual é fechada e
         // a janela de registro é aberta
         lblRegistrar.addMouseListener(new MouseAdapter(){
-            @Override
+        
             public void mouseClicked(MouseEvent e){
                 frame.dispose();
                 new Registro();
@@ -155,8 +159,8 @@ public class Login {
             "ERRO!", JOptionPane.ERROR_MESSAGE);
         return;
         }
-        JOptionPane.showMessageDialog(null,
-        "Você Entrou no Sistema", "Bem Vindo!", JOptionPane.INFORMATION_MESSAGE);
+        frame.dispose();
+        new Principal();
     }
     
 }

@@ -2,9 +2,7 @@ import javax.swing.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.*;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.awt.geom.RoundRectangle2D;
 
 
@@ -18,10 +16,13 @@ public class Registro{
     private JTextField txtIdade;
     private JComboBox<String> sexo;
     private JButton btnRegistrar;
+    private JPanel fundoAzul;
+    private JLabel txtRegistro;
     private JLabel lblFechar;
     private JLabel lblLogo;
+    private JLabel txtlogo;
+    private JLabel lblEmail;
     private JTextField txtEmail;
-    private List<JCheckBox> generos;
 
     public Registro(){
         prepararJanela();
@@ -33,7 +34,6 @@ public class Registro{
 
     private void prepararJanela(){
         frame = new JFrame("Registrar-se");
-        frame.setBackground(Color.BLUE);
         frame.setUndecorated(true);
         frame.setShape(new RoundRectangle2D.Double(0, 0, 700, 450, 20, 20));
         frame.setSize(700, 450);
@@ -117,7 +117,7 @@ public class Registro{
         lblFechar = new JLabel();
         lblLogo  = new JLabel();
         lblFechar.setIcon(new ImageIcon(this.getClass().getResource("BotaoFechar.png")));
-        lblLogo.setIcon(new ImageIcon(this.getClass().getResource("BibliotecaIcone.png")));
+        lblLogo.setIcon(new ImageIcon(this.getClass().getResource("BibliotecaIconeRegistro&Login.png")));
         lblFechar.setBounds(670, 10, 20, 20);
         lblLogo.setBounds(12, 50, 300, 300);
         this.panel.add(lblFechar);
@@ -191,12 +191,6 @@ public class Registro{
         suspense.setForeground(Color.decode("#3CC3BE"));
         historiaEmQuadrinhos.setForeground(Color.decode("#3CC3BE"));
         lblGeneros.setForeground(Color.decode("#3CC3BE"));
-        this.generos = new ArrayList<JCheckBox>();
-        this.generos.add(ficcaoCientifica);
-        this.generos.add(romance);
-        this.generos.add(autoAjuda);
-        this.generos.add(suspense);
-        this.generos.add(historiaEmQuadrinhos);
         this.panel.add(lblGeneros);
         this.panel.add(ficcaoCientifica);
         this.panel.add(romance);
@@ -249,45 +243,9 @@ public class Registro{
             "ERRO!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if (senha.length < 5){
-            JOptionPane.showMessageDialog(null,"A senha deve ter no mínimo 5 caracteres",
-            "ERRO!", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        registrarUsuario();
         JOptionPane.showMessageDialog(null,
         "Registrado com sucesso!", "Registrado!", JOptionPane.INFORMATION_MESSAGE);
         this.frame.dispose();
         new Login();
-    }
-
-    public void registrarUsuario(){
-        UsuarioDao userDao = new UsuarioDao();
-        Usuario user = new Usuario();
-        user.setNome(this.txtNome.getText());
-        String sexo = this.sexo.getSelectedItem().toString();
-        if (sexo == "Masculino"){
-            sexo = "M";
-        } else if (sexo == "Feminino"){
-            sexo = "F";
-        } else {
-            sexo = "X";
-        }
-        user.setSexo(sexo);
-        user.setEmail(this.txtEmail.getText());
-        user.setIdade(Integer.parseInt(this.txtIdade.getText()));
-        List<String> strGeneros = new ArrayList<String>();
-        for (JCheckBox box : this.generos){
-            if (box.isSelected()){
-                strGeneros.add(box.getText());
-            }
-        }
-        String[] generosPref = strGeneros.toArray(new String[strGeneros.size()]);
-        user.setPreferencia(generosPref);
-        String senha = new String(this.txtSenha.getPassword());
-        String senhaSHA = GeradorSHA256.getSHA256(senha);
-        user.setSenha(senhaSHA);
-        userDao.adiciona(user);
-        System.out.println("Funcionou porra!!!");
     }
 }

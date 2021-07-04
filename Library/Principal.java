@@ -26,6 +26,7 @@ public class Principal {
     private JLabel todosOsLivros;
     private JPanel logoFundo;
     private Usuario user;
+    private List<Livro> recomendados;
 
     public Principal(Usuario user){
         this.user = user;
@@ -229,6 +230,7 @@ public class Principal {
         String sql = "SELECT * FROM livro WHERE genero NOT IN (" + in + ")";
         List<Livro> outros = livrodao.getLivros(sql);
         recomendados.addAll(outros);
+        this.recomendados = recomendados;
         List<BufferedImage> imagens = new ArrayList<BufferedImage>();
         for (Livro livro : recomendados){
             imagens.add(livro.getImagem());

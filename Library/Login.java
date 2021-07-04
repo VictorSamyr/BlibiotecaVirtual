@@ -4,7 +4,7 @@ import java.awt.Font;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.Arrays;
-import javax.imageio.*;
+import java.util.List;
 
 
 
@@ -17,12 +17,9 @@ public class Login {
     private JButton btnEntrar;
     private JLabel lblRegistrar;
     private JLabel lblFechar;
-    private JPanel imgLogin;
-    private JLabel tituloLogin;
     private JLabel labelLogin;
     private JLabel labelSenha;
     private JLabel labelLogo;
-    private JLabel txtlogo;
     
     public Login(){
         configurarJanela();
@@ -159,7 +156,32 @@ public class Login {
             "ERRO!", JOptionPane.ERROR_MESSAGE);
         return;
         }
+        logarUsuario();
+    }
+
+    private void logarUsuario(){
+        String login = this.txtLogin.getText();
+        String senha = new String(this.txtSenha.getPassword());
+        String senhaSHA = GeradorSHA256.getSHA256(senha);
+        UsuarioDao userdao = new UsuarioDao();
+        String comando = "SELECT * FROM usuario WHERE login = '" + login + "'";
+        List<Usuario> users = userdao.getUsuarios(comando);
+        if (users.size() < 1)
+        {
+            JOptionPane.showMessageDialog(null,"Login ou Senha Inválidos",
+            "ERRO!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        Usuario usuario = users.get(0);
+        if (!senhaSHA.equals(usuario.getSenha()))
+        {
+            JOptionPane.showMessageDialog(null,"Login ou Senha Inválidos",
+            "ERRO!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         frame.dispose();
+        JOptionPane.showMessageDialog(null,
+        "Registrado com sucesso!", "Registrado!", JOptionPane.INFORMATION_MESSAGE);
         new Principal();
     }
     

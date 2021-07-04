@@ -2,6 +2,7 @@ public class Usuario {
 
     private int idUsuario;
     private String nome;
+    private String login;
     private String sexo;
     private String email;
     private int idade;
@@ -26,6 +27,15 @@ public class Usuario {
 
     public void setNome(String novoNome) {
         this.nome = novoNome;
+    }
+
+    // Login
+    public String getLogin(){
+        return this.login;
+    }
+
+    public void setLogin(String login){
+        this.login = login;
     }
 
     //Sexo

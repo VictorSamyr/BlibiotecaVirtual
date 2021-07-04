@@ -185,9 +185,7 @@ public class Login {
             return;
         }
         frame.dispose();
-        JOptionPane.showMessageDialog(null,
-        "Registrado com sucesso!", "Registrado!", JOptionPane.INFORMATION_MESSAGE);
-        new Principal();
+        new Principal(usuario);
     }
     
 }

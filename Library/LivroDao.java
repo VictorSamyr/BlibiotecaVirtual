@@ -27,7 +27,7 @@ public class LivroDao {
             PreparedStatement stmt = this.connection.prepareStatement(comando);
             stmt.setString(1, livro.getGenero());
             stmt.setInt(2, livro.getAnoLancamento());
-            stmt.setInt(3, livro.getIsbn());
+            stmt.setLong(3, livro.getIsbn());
             stmt.setString(4, livro.getSinopse());
             stmt.setString(5, livro.getAutor());
             stmt.execute();
@@ -51,7 +51,7 @@ public class LivroDao {
                 livro.setIdLivro(rs.getInt("id_livro"));
                 livro.setGenero(rs.getString("genero"));
                 livro.setAnoLancamento(rs.getInt("ano_lancamento"));
-                livro.setIsbn(rs.getInt("isbn"));
+                livro.setIsbn(rs.getLong("isbn"));
                 livro.setSinopse(rs.getString("sinopse"));
                 livro.setAutor(rs.getString("autor"));
                 InputStream is = rs.getBinaryStream("imagem");

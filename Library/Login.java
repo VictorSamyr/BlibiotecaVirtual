@@ -6,6 +6,8 @@ import java.awt.event.*;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.imageio.*;
+
 
 
 
@@ -17,9 +19,12 @@ public class Login {
     private JButton btnEntrar;
     private JLabel lblRegistrar;
     private JLabel lblFechar;
+    private JPanel imgLogin;
+    private JLabel tituloLogin;
     private JLabel labelLogin;
     private JLabel labelSenha;
     private JLabel labelLogo;
+    private JLabel txtlogo;
     
     public Login(){
         configurarJanela();

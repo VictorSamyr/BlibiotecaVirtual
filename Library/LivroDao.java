@@ -49,6 +49,7 @@ public class LivroDao {
                 livro.setAnoLancamento(rs.getInt("ano_lancamento"));
                 livro.setSinopse(rs.getString("sinopse"));
                 livro.setAutor(rs.getString("autor"));
+                livro.setImagem(rs.getString("imagem"));
                 livros.add(livro);
             }
             rs.close();

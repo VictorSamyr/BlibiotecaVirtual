@@ -7,7 +7,7 @@ public class GeradorSHA256 {
     public static String getSHA256(String input){
         MessageDigest md;
         try {
-            md = MessageDigest.getInstance("SHA256");
+            md = MessageDigest.getInstance("SHA-256");
             byte[] inputByte = input.getBytes(StandardCharsets.UTF_8);
             byte[] shaByte = md.digest(inputByte); 
             BigInteger number = new BigInteger(1, shaByte);

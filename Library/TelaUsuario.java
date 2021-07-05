@@ -32,7 +32,7 @@ public class TelaUsuario {
     public void configurarPanel(){
         this.panel.setLayout(null);
         panel.setVisible(true);
-        panel.setBackground(Color.decode("#FFFFFF"));
+        panel.setBackground(Color.decode("#3cc3be"));
         mostrarPainelUsuario();
         mostrarDadosUsuario();
         mostrarGenerosFavoritos();
@@ -45,9 +45,10 @@ public class TelaUsuario {
         JLabel lblNome = new JLabel(this.usuario.getNome(), SwingConstants.CENTER);
         lblNome.setBounds(0, 90, 420, 100);
         lblNome.setFont(new Font("",Font.BOLD, 17));
+        lblNome.setForeground(Color.decode("#FFFFFF"));
         JPanel panelUser = new JPanel();
         panelUser.setLayout(null);
-        panelUser.setBackground(Color.decode("#189AB4"));
+        panelUser.setBackground(Color.decode("#2E3E77"));
         panelUser.setBounds(0, 0, 420, 160);
         panelUser.add(iconeUsuario);
         panelUser.add(lblNome);
@@ -58,9 +59,11 @@ public class TelaUsuario {
         JLabel lblLogin = new JLabel("Login: " + this.usuario.getLogin());
         lblLogin.setBounds(20, 140, 300, 100);
         lblLogin.setFont(new Font("",Font.BOLD, 17));
+        lblLogin.setForeground(Color.decode("#FFFFFF"));
         JLabel lblEmail = new JLabel("Email: " + this.usuario.getEmail());
         lblEmail.setBounds(20, 180, 310, 100);
         lblEmail.setFont(new Font("",Font.BOLD, 17));
+        lblEmail.setForeground(Color.decode("#FFFFFF"));
         String sexo;
         if (this.usuario.getSexo().equals("M")){sexo = "Masculino";}
         else if (this.usuario.getSexo().equals("F")){sexo = "Feminino";}
@@ -68,9 +71,11 @@ public class TelaUsuario {
         JLabel lblSexo = new JLabel("Sexo: " + sexo);
         lblSexo.setBounds(20, 220, 310, 100);
         lblSexo.setFont(new Font("",Font.BOLD, 17));
+        lblSexo.setForeground(Color.decode("#FFFFFF"));
         JLabel lblIdade = new JLabel("Idade: " + Integer.toString(this.usuario.getIdade()));
         lblIdade.setBounds(20, 260, 310, 100);
         lblIdade.setFont(new Font("",Font.BOLD, 17));
+        lblIdade.setForeground(Color.decode("#FFFFFF"));
         panel.add(lblLogin);
         panel.add(lblEmail);
         panel.add(lblSexo);
@@ -81,13 +86,15 @@ public class TelaUsuario {
         JLabel lblPreferidos = new JLabel("Gêneros Preferidos:");
         lblPreferidos.setBounds(20, 300, 310, 100);
         lblPreferidos.setFont(new Font("",Font.BOLD, 17));
+        lblPreferidos.setForeground(Color.decode("#FFFFFF"));
         JPanel favoritos = new JPanel();
         favoritos.setLayout(new GridLayout(3, 2));
-        favoritos.setBackground(Color.decode("#FFFFFF"));
+        favoritos.setBackground(Color.decode("#3cc3be"));
         favoritos.setBounds(30, 360, 380, 90);
         for (String genero : this.usuario.getPreferencia()){
             JLabel lblGenero = new JLabel(genero);
             lblGenero.setFont(new Font("",Font.BOLD, 15));
+            lblGenero.setForeground(Color.decode("#FFFFFF"));
             favoritos.add(lblGenero);
         }
         panel.add(lblPreferidos);

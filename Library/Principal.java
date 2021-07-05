@@ -7,6 +7,12 @@ import java.awt.event.*;
 import java.awt.Color;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.Font;
+import java.io.File;
+import java.awt.image.BufferedImage;
+import java.awt.Image;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+
 
 public class Principal {
     private JFrame frame;    
@@ -43,6 +49,7 @@ public class Principal {
         }    
 
         private void colocarComponentes(){
+        JPanel fundoPrincipal = new JPanel();
         JPanel logoFundo = new JPanel();
         JPanel editorasParceiras = new JPanel();
         JLabel todosOsLivros = new JLabel("Todos Os Livros");
@@ -50,27 +57,75 @@ public class Principal {
         todosOsLivros.setFont(new Font("", Font.BOLD, 45));
         todosOsLivros.setForeground(Color.decode("#3cc3be"));
         editorasParceiras.setBounds(200, 520, 800, 200);
-        editorasParceiras.setBackground(Color.decode("#38B4D9"));
+        editorasParceiras.setBackground(Color.decode("#3cc3be"));
         logoFundo.setBounds(2, 5, 195, 195);
         logoFundo.setBackground(Color.decode("#3CC3BE"));
+        fundoPrincipal.setBounds(0, 200, 200, 440);
+        fundoPrincipal.setBackground(Color.decode("#FFFFFF"));
         definirOpçaoConta();
-        definirOpçaoFavoritos();
         definirOpçaoSair();
-        definirOpçãoBusca();
-        definirOpçaoCategorias();
-        definirImgLogo();
+        definirImagensDaTelaPrincipal();
+        mostrarImagensDosLivros();
+        this.panel.add(fundoPrincipal);
         this.panel.add(logoFundo);
         this.panel.add(editorasParceiras);
         this.panel.add(todosOsLivros);
     }
 
-    private void definirImgLogo(){
+    private void definirImagensDaTelaPrincipal(){
+        try {
+        JLabel img1 = new JLabel();
         JLabel bibliotecaIcone = new JLabel();
         bibliotecaIcone.setIcon(new ImageIcon(this.getClass().getResource("BibliotecaIconePrincipal.png"))); 
         bibliotecaIcone.setBounds(0, 0, 200, 200);
+        
+    
+        
         this.panel.add(bibliotecaIcone);
+        this.panel.add(img1);
+    } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
+        
     }
+    private void mostrarImagensDosLivros(){
+        
+        JLabel img1 = new JLabel();
+        JLabel img2 = new JLabel();
+        JLabel img3 = new JLabel();
+        JLabel img4 = new JLabel();
+        JLabel img5 = new JLabel();
+        JLabel img6 = new JLabel();
+        JLabel img7 = new JLabel();
+        JLabel img8 = new JLabel();
+        JLabel img9 = new JLabel();
+        JLabel img10 = new JLabel();
+        JLabel[] labels = new JLabel[]{img1,img2,img3,img4,img5,img6,img7,img8,img9,img10};
+        String[] nomeLivros1 = new String[]{"ACulpaEDasEstrelas.jpg","AQuedaDoMorcegoV1.jpg","BladeRunner.jpg","ComoFazerAmigosEInfluenciarPessoas.jpg","Crepusculo.jpg"};
+        int limitadorX = 230;
 
+        for(int i=0 ; i < 5; i++){
+            modificarImagemLivro(labels[i], nomeLivros1[i], limitadorX, 80);
+            limitadorX = limitadorX + 150;
+        }
+        String[] nomeLivros2 = new String[]{"InvincibleUltimateCollectionV3.jpg","ItACoisa.jpg","Neuromancer.png","OHorrorDeDunwich.jpg","OPoderDoHabito.jpg"};
+        
+        limitadorX = 230;
+        
+        for(int i=0 ; i < 5; i++){    
+           modificarImagemLivro(labels[i+5], nomeLivros2[i], limitadorX, 300);
+           limitadorX = limitadorX + 150;
+        }
+    }
+    
+    private void modificarImagemLivro(JLabel l, String n, int x, int y){
+        ImageIcon imagem = new ImageIcon(this.getClass().getResource("Images/"+n));
+        Image pegaImagem = imagem.getImage();
+        Image ImagemModificada = pegaImagem.getScaledInstance(130, 200, java.awt.Image.SCALE_SMOOTH);
+        l.setIcon(new ImageIcon(ImagemModificada));
+        l.setBounds(x, y, 130, 200);
+        this.panel.add(l);
+    }
     private void trocarCor(JButton btn, JPanel p){
 
         btn.addMouseListener(new MouseAdapter(){
@@ -114,74 +169,10 @@ public class Principal {
         btnSair.setBorderPainted(false);
     }
 
-    private void definirOpçãoBusca(){
-        btnBusca = new JButton();
-        btnBusca.setBounds(0, 440, 200, 80);
-        JPanel opçao4 = new JPanel();
-        opçao4.setBounds(0, 440, 200, 80);
-        opçao4.setBackground(Color.decode("#3cc3be"));
-        opçao4.setLayout(null);
-        JLabel opçao4txt  = new JLabel("Busca");
-        opçao4txt.setBounds(50, 27, 90, 25);
-        opçao4txt.setFont(new Font("", Font.BOLD, 25));
-        opçao4txt.setForeground(Color.decode("#FFFFFF"));
-        
-        trocarCor(btnBusca, opçao4);
-        
-        this.panel.add(opçao4);
-        opçao4.add(opçao4txt);
-        this.panel.add(btnBusca);
-        btnBusca.setOpaque(false);
-        btnBusca.setContentAreaFilled(false);
-        btnBusca.setBorderPainted(false);
-    }
-
-    private void definirOpçaoCategorias(){
-        JButton btnCategorias = new JButton();
-        btnCategorias.setBounds(0, 360, 200, 80);
-        JPanel opçao3 = new JPanel();
-        opçao3.setBounds(0, 360, 200, 80);
-        opçao3.setBackground(Color.decode("#3cc3be"));
-        JLabel opçao3txt  = new JLabel("Categorias");
-        opçao3txt.setBounds(50, 20, 180, 40);
-        opçao3txt.setFont(new Font("", Font.BOLD, 25));
-        opçao3txt.setForeground(Color.decode("#FFFFFF"));
-        opçao3.setLayout(null);
-        
-        trocarCor(btnCategorias,opçao3);
-        
-        this.panel.add(opçao3);
-        opçao3.add(opçao3txt);
-        this.panel.add(btnCategorias);
-        btnCategorias.setOpaque(false);
-        btnCategorias.setContentAreaFilled(false);
-        btnCategorias.setBorderPainted(false);
-    }
-
-    private void definirOpçaoFavoritos(){
-        JPanel opçao2 = new JPanel();
-        opçao2.setBounds(0, 280, 200, 80);
-        opçao2.setBackground(Color.decode("#3cc3be"));
-        opçao2.setLayout(null);
-        JLabel opçao2txt  = new JLabel("Favoritos");
-        opçao2txt.setBounds(50, 20, 180, 40);
-        opçao2txt.setFont(new Font("", Font.BOLD, 25));
-        opçao2txt.setForeground(Color.decode("#FFFFFF"));
-        JButton btnFavoritos = new JButton();
-        btnFavoritos.setBounds(0, 280, 200, 80);
-
-        trocarCor(btnFavoritos, opçao2);
-
-        this.panel.add(opçao2);
-        opçao2.add(opçao2txt);
-        this.panel.add(btnFavoritos);
-        btnFavoritos.setOpaque(false);
-        btnFavoritos.setContentAreaFilled(false);
-        btnFavoritos.setBorderPainted(false);
-    }
+    
     private void definirOpçaoConta(){
         JPanel opçao1 = new JPanel();
-        opçao1.setBounds(0, 200, 200, 80);
+        opçao1.setBounds(0, 440, 200, 80);
         opçao1.setBackground(Color.decode("#3cc3be"));
         opçao1.setLayout(null);
         JLabel opçao1txt = new JLabel("Conta");
@@ -189,7 +180,7 @@ public class Principal {
         opçao1txt.setFont(new Font("", Font.BOLD, 25));
         opçao1txt.setForeground(Color.decode("#FFFFFF"));
         JButton btnConta = new JButton();
-        btnConta.setBounds(0, 200, 200, 80);    
+        btnConta.setBounds(0, 440, 200, 80);    
         
         trocarCor(btnConta, opçao1);
 

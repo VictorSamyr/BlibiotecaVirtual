@@ -3,34 +3,20 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
-import javax.swing.Icon;
 import java.awt.event.*;
 import java.awt.Color;
 import java.awt.geom.RoundRectangle2D;
-import java.util.ArrayList;
-import java.util.List;
 import java.awt.Font;
-import java.awt.BorderLayout;
-import java.awt.image.BufferedImage;
 
 public class Principal {
     private JFrame frame;    
     private JPanel panel;
-    private JLabel bibliotecaIcone;
-    private JPanel editorasParceiras;
     private JButton btnSair;
     private JButton btnBusca;
-    private JButton btnCategorias;
-    private JButton btnFavoritos;
-    private JButton btnConta;
-    private JLabel todosOsLivros;
-    private JPanel logoFundo;
     private Usuario user;
-    private List<Livro> recomendados;
 
     public Principal(Usuario user){
         this.user = user;
-        getImagensLivros();
         prepararJanela();
         inicializar();
     }
@@ -213,28 +199,12 @@ public class Principal {
         btnConta.setOpaque(false);
         btnConta.setContentAreaFilled(false);
         btnConta.setBorderPainted(false);
-    }
-
-    public List<BufferedImage> getImagensLivros(){
-        LivroDao livrodao = new LivroDao();
-        String[] preferencias = this.user.getPreferencia();
-        String in = "";
-        for (int i = 0; i < preferencias.length; i++){
-            in = in + "'" + preferencias[i] + "'";
-            if (i + 1 < preferencias.length){
-                in = in + ",";
+        btnConta.addMouseListener(new MouseAdapter(){
+        
+            public void mouseClicked(MouseEvent e){
+                TelaAuxiliar telaUsuario = new TelaAuxiliar();
+                telaUsuario.abrirTelaUsuario(user);
             }
-        }
-        String comando = "SELECT * FROM livro WHERE genero IN (" + in + ")";
-        List<Livro> recomendados = livrodao.getLivros(comando);
-        String sql = "SELECT * FROM livro WHERE genero NOT IN (" + in + ")";
-        List<Livro> outros = livrodao.getLivros(sql);
-        recomendados.addAll(outros);
-        this.recomendados = recomendados;
-        List<BufferedImage> imagens = new ArrayList<BufferedImage>();
-        for (Livro livro : recomendados){
-            imagens.add(livro.getImagem());
-        }
-        return imagens;
+        });
     }
 }

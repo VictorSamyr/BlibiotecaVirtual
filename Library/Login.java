@@ -6,10 +6,6 @@ import java.awt.event.*;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.imageio.*;
-
-
-
 
 public class Login {
     private JFrame frame;
@@ -18,13 +14,10 @@ public class Login {
     private JPasswordField txtSenha;
     private JButton btnEntrar;
     private JLabel lblRegistrar;
-    private JLabel lblFechar;
-    private JPanel imgLogin;
-    private JLabel tituloLogin;
+    private JLabel lblFechar;;
     private JLabel labelLogin;
     private JLabel labelSenha;
     private JLabel labelLogo;
-    private JLabel txtlogo;
     
     public Login(){
         configurarJanela();
@@ -169,7 +162,7 @@ public class Login {
         String senha = new String(this.txtSenha.getPassword());
         String senhaSHA = GeradorSHA256.getSHA256(senha);
         UsuarioDao userdao = new UsuarioDao();
-        String comando = "SELECT * FROM usuario WHERE login = '" + login + "'";
+        String comando = "SELECT * FROM usuarios WHERE login = '" + login + "'";
         List<Usuario> users = userdao.getUsuarios(comando);
         if (users.size() < 1)
         {

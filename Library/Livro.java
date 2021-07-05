@@ -1,14 +1,12 @@
-import java.awt.image.BufferedImage;
-
 public class Livro {
 
     private int idLivro;
     private String genero;
     private int anoLancamento;
-    private long isbn;
+    private String titulo;
     private String sinopse;
     private String autor;
-    private BufferedImage imagem;
+    private String imagem;
 
     //Gets e Sets
 
@@ -21,6 +19,15 @@ public class Livro {
 
     public void setIdLivro(int novoIdLivro) {
         this.idLivro = novoIdLivro;
+    }
+
+    //Titulo
+    public String getTitulo(){
+        return this.titulo;
+    }
+
+    public void setTitulo(String titulo){
+        this.titulo = titulo;
     }
 
     // Gênero
@@ -39,15 +46,6 @@ public class Livro {
 
     public void setAnoLancamento(int novoAnoLancamento) {
         this.anoLancamento = novoAnoLancamento;
-    }
-
-    // ISBN
-    public long getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(long novoIsbn) {
-        this.isbn = novoIsbn;
     }
 
     // Sínopse
@@ -69,11 +67,11 @@ public class Livro {
     }
 
     // Imagem
-    public BufferedImage getImagem(){
+    public String getImagem(){
         return this.imagem;
     }
 
-    public void setImagem(BufferedImage imagem){
+    public void setImagem(String imagem){
         this.imagem = imagem;
     }
 }

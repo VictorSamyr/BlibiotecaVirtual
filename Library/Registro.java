@@ -17,12 +17,8 @@ public class Registro{
     private JTextField txtIdade;
     private JComboBox<String> sexo;
     private JButton btnRegistrar;
-    private JPanel fundoAzul;
-    private JLabel txtRegistro;
     private JLabel lblFechar;
     private JLabel lblLogo;
-    private JLabel txtlogo;
-    private JLabel lblEmail;
     private JTextField txtEmail;
     private List<JCheckBox> generos;
 
@@ -271,7 +267,7 @@ public class Registro{
     public boolean loginValido(){
         String login = this.txtLogin.getText();
         UsuarioDao userdao = new UsuarioDao();
-        String comando = "SELECT * FROM usuario WHERE login = '" + login + "'";
+        String comando = "SELECT * FROM usuarios WHERE login = '" + login + "'";
         List<Usuario> users = userdao.getUsuarios(comando);
         return users.size() < 1;
     }

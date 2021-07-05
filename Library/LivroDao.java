@@ -6,12 +6,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.imageio.ImageIO;
-
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-
 public class LivroDao {
     private Connection connection;
 
@@ -20,16 +14,17 @@ public class LivroDao {
     }
 
     public void adiciona(Livro livro){
-        String comando = "INSERT INTO livro(genero, ano_lancamento, isbn, sinopse, autor, imagem)"
+        String comando = "INSERT INTO livros(titulo, genero, autor, ano_lancamento, sinopse, imagem)"
                        + "VALUES(?, ?, ?, ?, ?, ?)";
         try
         {
             PreparedStatement stmt = this.connection.prepareStatement(comando);
-            stmt.setString(1, livro.getGenero());
-            stmt.setInt(2, livro.getAnoLancamento());
-            stmt.setLong(3, livro.getIsbn());
-            stmt.setString(4, livro.getSinopse());
-            stmt.setString(5, livro.getAutor());
+            stmt.setString(1, livro.getTitulo());
+            stmt.setString(2, livro.getGenero());
+            stmt.setString(3, livro.getAutor());
+            stmt.setInt(4, livro.getAnoLancamento());
+            stmt.setString(5, livro.getSinopse());
+            stmt.setString(6, livro.getImagem());
             stmt.execute();
             stmt.close();
         }
@@ -48,15 +43,12 @@ public class LivroDao {
             while (rs.next())
             {
                 Livro livro = new Livro();
-                livro.setIdLivro(rs.getInt("id_livro"));
+                livro.setIdLivro(rs.getInt("id"));
+                livro.setTitulo(rs.getString("titulo"));
                 livro.setGenero(rs.getString("genero"));
                 livro.setAnoLancamento(rs.getInt("ano_lancamento"));
-                livro.setIsbn(rs.getLong("isbn"));
                 livro.setSinopse(rs.getString("sinopse"));
                 livro.setAutor(rs.getString("autor"));
-                InputStream is = rs.getBinaryStream("imagem");
-                BufferedImage img = ImageIO.read(is);
-                livro.setImagem(img);
                 livros.add(livro);
             }
             rs.close();
@@ -65,8 +57,6 @@ public class LivroDao {
         }
         catch (SQLException e)
         {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }

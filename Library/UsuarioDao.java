@@ -14,14 +14,14 @@ public class UsuarioDao {
     }
 
     public void adiciona(Usuario usuario){
-        String comando = "INSERT INTO usuario(nome, login, sexo, email, idade, preferencia, senha)"
+        String comando = "INSERT INTO usuarios(nome, login, sexo, email, idade, generos_preferidos, senha)"
                        + " VALUES(?, ?, ?, ?, ?, ?, ?)";
         try
         {
             PreparedStatement stmt = this.connection.prepareStatement(comando);
             stmt.setString(1, usuario.getNome());
             stmt.setString(2, usuario.getLogin());
-            stmt.setString(3, String.valueOf(usuario.getSexo()));
+            stmt.setString(3, usuario.getSexo());
             stmt.setString(4, usuario.getEmail());
             stmt.setInt(5, usuario.getIdade());
             String preferencia = String.join(",", usuario.getPreferencia());
@@ -45,12 +45,13 @@ public class UsuarioDao {
             while(rs.next())
             {
                 Usuario usuario = new Usuario();
-                usuario.setIdUsuario(rs.getInt("id_usuario"));
+                usuario.setIdUsuario(rs.getInt("id"));
                 usuario.setNome(rs.getString("nome"));
+                usuario.setLogin(rs.getString("login"));
                 usuario.setSexo(rs.getString("sexo"));
                 usuario.setEmail(rs.getString("email"));
                 usuario.setIdade(rs.getInt("idade"));
-                String preferencias = rs.getString("preferencia");
+                String preferencias = rs.getString("generos_preferidos");
                 usuario.setPreferencia(preferencias.split(","));
                 usuario.setSenha(rs.getString("senha"));
                 usuarios.add(usuario);

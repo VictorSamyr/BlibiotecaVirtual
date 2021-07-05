@@ -6,7 +6,7 @@ public class ConnectionFactory{
     public static Connection getConnection(){
         try
         {
-            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/Library DB",
+            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/biblioteca",
                                                "postgres", "password");
         }
         catch (SQLException e)

@@ -6,6 +6,8 @@ import javax.swing.ImageIcon;
 import java.awt.event.*;
 import java.awt.Color;
 import java.awt.geom.RoundRectangle2D;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.Font;
 import java.awt.Image;
 
@@ -95,34 +97,33 @@ public class Principal {
         
     }
     private void mostrarImagensDosLivros(JLabel[] labelss){
-        
-        
-        JLabel[] labels = labelss;
-        String[] nomeLivros1 = new String[]{"ACulpaEDasEstrelas.jpg","AQuedaDoMorcegoV1.jpg","BladeRunner.jpg","ComoFazerAmigosEInfluenciarPessoas.jpg","Crepusculo.jpg"};
-        int limitadorX = 230;
-
-        for(int i=0 ; i < 5; i++){
-            modificarImagemLivro(labels[i], nomeLivros1[i], limitadorX, 80);
-            limitadorX = limitadorX + 150;
+        List<String> paths = getPathImagens();
+        int index = 0;
+        int x = 230;
+        for (int i = 0; i < 5; i++){
+            String imagem = paths.get(i);
+            modificarImagemLivro(imagem, x, 80);
+            index = i;
+            x += 150;
         }
-        String[] nomeLivros2 = new String[]{"InvincibleUltimateCollectionV3.jpg","ItACoisa.jpg","Neuromancer.png","OHorrorDeDunwich.jpg","OPoderDoHabito.jpg"};
-        
-        limitadorX = 230;
-        
-        for(int i=0 ; i < 5; i++){    
-           modificarImagemLivro(labels[i+5], nomeLivros2[i], limitadorX, 300);
-           limitadorX = limitadorX + 150;
+        x = 230;
+        for (int i = index; i < 10; i++){
+            String imagem = paths.get(i);
+            modificarImagemLivro(imagem, x, 300);
+            x += 150;
         }
     }
     
-    private void modificarImagemLivro(JLabel l, String n, int x, int y){
-        ImageIcon imagem = new ImageIcon(this.getClass().getResource("Images/"+n));
+    private void modificarImagemLivro(String n, int x, int y){
+        JLabel l = new JLabel();
+        ImageIcon imagem = new ImageIcon(n);
         Image pegaImagem = imagem.getImage();
         Image ImagemModificada = pegaImagem.getScaledInstance(130, 200, java.awt.Image.SCALE_SMOOTH);
         l.setIcon(new ImageIcon(ImagemModificada));
         l.setBounds(x, y, 130, 200);
         this.panel.add(l);
     }
+
     private void trocarCor(JButton btn, JPanel p){
 
         btn.addMouseListener(new MouseAdapter(){
@@ -135,6 +136,17 @@ public class Principal {
             p.setBackground(Color.decode("#3cc3be"));
             }
         });
+    }
+
+    private List<String> getPathImagens(){
+        List<String> paths = new ArrayList<String>();
+        LivroDao livrodao = new LivroDao();
+        String comando = "SELECT * FROM livros;";
+        List<Livro> livros = livrodao.getLivros(comando);
+        for (Livro livro : livros){
+            paths.add(livro.getImagem());
+        }
+        return paths;
     }
 
     private void definirOpçaoSair(){

@@ -7,18 +7,13 @@ import java.awt.event.*;
 import java.awt.Color;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.Font;
-import java.io.File;
-import java.awt.image.BufferedImage;
 import java.awt.Image;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 
 
 public class Principal {
     private JFrame frame;    
     private JPanel panel;
     private JButton btnSair;
-    private JButton btnBusca;
     private Usuario user;
     JLabel img1 = new JLabel();
     JLabel img2 = new JLabel();
@@ -192,11 +187,11 @@ public class Principal {
         btnConta.setOpaque(false);
         btnConta.setContentAreaFilled(false);
         btnConta.setBorderPainted(false);
+        Usuario usuario = this.user;
         btnConta.addMouseListener(new MouseAdapter(){
         
             public void mouseClicked(MouseEvent e){
-                TelaAuxiliar telaUsuario = new TelaAuxiliar();
-                telaUsuario.abrirTelaUsuario(user);
+                new TelaUsuario(usuario);
             }
         });
     }

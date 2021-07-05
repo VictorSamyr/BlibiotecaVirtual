@@ -19,17 +19,28 @@ public class Principal {
     private JPanel panel;
     private JButton btnSair;
     private JButton btnBusca;
-    private Usuario usuario;
-
-    public Principal(Usuario usuario){
-        this.usuario = usuario;
+    private Usuario user;
+    JLabel img1 = new JLabel();
+    JLabel img2 = new JLabel();
+    JLabel img3 = new JLabel();
+    JLabel img4 = new JLabel();
+    JLabel img5 = new JLabel();
+    JLabel img6 = new JLabel();
+    JLabel img7 = new JLabel();
+    JLabel img8 = new JLabel();
+    JLabel img9 = new JLabel();
+    JLabel img10 = new JLabel();
+    JLabel[] labels = new JLabel[]{img1,img2,img3,img4,img5,img6,img7,img8,img9,img10};
+    
+    public Principal(Usuario user){
+        this.user = user;
         prepararJanela();
         inicializar();
     }
 
     private void inicializar(){
         panel = new JPanel();
-        panel.setBackground(Color.decode("#FFFFFF"));
+        panel.setBackground(Color.decode("#2e3e77"));
         // Optamos por não usar nem um layout manager, pois nos dá mais liberdade e
         // agilidade ao inserir componentes
         panel.setLayout(null);
@@ -55,17 +66,17 @@ public class Principal {
         JLabel todosOsLivros = new JLabel("Todos Os Livros");
         todosOsLivros.setBounds(220, 10, 500, 50);
         todosOsLivros.setFont(new Font("", Font.BOLD, 45));
-        todosOsLivros.setForeground(Color.decode("#3cc3be"));
+        todosOsLivros.setForeground(Color.decode("#FFFFFF"));
         editorasParceiras.setBounds(200, 520, 800, 200);
         editorasParceiras.setBackground(Color.decode("#3cc3be"));
         logoFundo.setBounds(2, 5, 195, 195);
-        logoFundo.setBackground(Color.decode("#3CC3BE"));
+        logoFundo.setBackground(Color.decode("#2e3e77"));
         fundoPrincipal.setBounds(0, 200, 200, 440);
-        fundoPrincipal.setBackground(Color.decode("#FFFFFF"));
+        fundoPrincipal.setBackground(Color.decode("#2e3e77"));
         definirOpçaoConta();
         definirOpçaoSair();
         definirImagensDaTelaPrincipal();
-        mostrarImagensDosLivros();
+        mostrarImagensDosLivros(labels);
         this.panel.add(fundoPrincipal);
         this.panel.add(logoFundo);
         this.panel.add(editorasParceiras);
@@ -88,19 +99,10 @@ public class Principal {
         }
         
     }
-    private void mostrarImagensDosLivros(){
+    private void mostrarImagensDosLivros(JLabel[] labelss){
         
-        JLabel img1 = new JLabel();
-        JLabel img2 = new JLabel();
-        JLabel img3 = new JLabel();
-        JLabel img4 = new JLabel();
-        JLabel img5 = new JLabel();
-        JLabel img6 = new JLabel();
-        JLabel img7 = new JLabel();
-        JLabel img8 = new JLabel();
-        JLabel img9 = new JLabel();
-        JLabel img10 = new JLabel();
-        JLabel[] labels = new JLabel[]{img1,img2,img3,img4,img5,img6,img7,img8,img9,img10};
+        
+        JLabel[] labels = labelss;
         String[] nomeLivros1 = new String[]{"ACulpaEDasEstrelas.jpg","AQuedaDoMorcegoV1.jpg","BladeRunner.jpg","ComoFazerAmigosEInfluenciarPessoas.jpg","Crepusculo.jpg"};
         int limitadorX = 230;
 
@@ -190,11 +192,11 @@ public class Principal {
         btnConta.setOpaque(false);
         btnConta.setContentAreaFilled(false);
         btnConta.setBorderPainted(false);
-        Usuario user = this.usuario;
         btnConta.addMouseListener(new MouseAdapter(){
         
             public void mouseClicked(MouseEvent e){
-                new TelaUsuario(user);
+                TelaAuxiliar telaUsuario = new TelaAuxiliar();
+                telaUsuario.abrirTelaUsuario(user);
             }
         });
     }

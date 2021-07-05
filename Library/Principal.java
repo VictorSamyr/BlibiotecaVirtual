@@ -13,10 +13,10 @@ public class Principal {
     private JPanel panel;
     private JButton btnSair;
     private JButton btnBusca;
-    private Usuario user;
+    private Usuario usuario;
 
-    public Principal(Usuario user){
-        this.user = user;
+    public Principal(Usuario usuario){
+        this.usuario = usuario;
         prepararJanela();
         inicializar();
     }
@@ -199,11 +199,11 @@ public class Principal {
         btnConta.setOpaque(false);
         btnConta.setContentAreaFilled(false);
         btnConta.setBorderPainted(false);
+        Usuario user = this.usuario;
         btnConta.addMouseListener(new MouseAdapter(){
         
             public void mouseClicked(MouseEvent e){
-                TelaAuxiliar telaUsuario = new TelaAuxiliar();
-                telaUsuario.abrirTelaUsuario(user);
+                new TelaUsuario(user);
             }
         });
     }

@@ -17,17 +17,7 @@ public class Principal {
     private JPanel panel;
     private JButton btnSair;
     private Usuario user;
-    JLabel img1 = new JLabel();
-    JLabel img2 = new JLabel();
-    JLabel img3 = new JLabel();
-    JLabel img4 = new JLabel();
-    JLabel img5 = new JLabel();
-    JLabel img6 = new JLabel();
-    JLabel img7 = new JLabel();
-    JLabel img8 = new JLabel();
-    JLabel img9 = new JLabel();
-    JLabel img10 = new JLabel();
-    JLabel[] labels = new JLabel[]{img1,img2,img3,img4,img5,img6,img7,img8,img9,img10};
+    private List<Livro> livros;
     
     public Principal(Usuario user){
         this.user = user;
@@ -73,7 +63,7 @@ public class Principal {
         definirOpçaoConta();
         definirOpçaoSair();
         definirImagensDaTelaPrincipal();
-        mostrarImagensDosLivros(labels);
+        mostrarImagensDosLivros();
         this.panel.add(fundoPrincipal);
         this.panel.add(logoFundo);
         this.panel.add(editorasParceiras);
@@ -96,32 +86,50 @@ public class Principal {
         }
         
     }
-    private void mostrarImagensDosLivros(JLabel[] labelss){
+    private void mostrarImagensDosLivros(){
         List<String> paths = getPathImagens();
-        int index = 0;
         int x = 230;
         for (int i = 0; i < 5; i++){
             String imagem = paths.get(i);
-            modificarImagemLivro(imagem, x, 80);
-            index = i;
+            JLabel imagem_livro = modificarImagemLivro(imagem, x, 80);
+            List<Livro> livros = this.livros;
+            int index = i;
+            imagem_livro.addMouseListener(new MouseAdapter(){
+        
+                public void mouseClicked(MouseEvent e){
+                    String titulo = livros.get(index).getTitulo();
+                    System.out.println("Clicou em " + titulo);
+                }
+            });
+            this.panel.add(imagem_livro);
             x += 150;
         }
         x = 230;
-        for (int i = index; i < 10; i++){
-            String imagem = paths.get(i);
-            modificarImagemLivro(imagem, x, 300);
+        for (int i = 0; i < 5; i++){
+            String imagem = paths.get(i+5);
+            JLabel imagem_livro = modificarImagemLivro(imagem, x, 300);
+            List<Livro> livros = this.livros;
+            int index = i+5;
+            imagem_livro.addMouseListener(new MouseAdapter(){
+        
+                public void mouseClicked(MouseEvent e){
+                    String titulo = livros.get(index).getTitulo();
+                    System.out.println("Clicou em " + titulo);
+                }
+            });
+            this.panel.add(imagem_livro);
             x += 150;
         }
     }
     
-    private void modificarImagemLivro(String n, int x, int y){
+    private JLabel modificarImagemLivro(String n, int x, int y){
         JLabel l = new JLabel();
         ImageIcon imagem = new ImageIcon(n);
         Image pegaImagem = imagem.getImage();
         Image ImagemModificada = pegaImagem.getScaledInstance(130, 200, java.awt.Image.SCALE_SMOOTH);
         l.setIcon(new ImageIcon(ImagemModificada));
         l.setBounds(x, y, 130, 200);
-        this.panel.add(l);
+        return l;
     }
 
     private void trocarCor(JButton btn, JPanel p){
@@ -142,8 +150,8 @@ public class Principal {
         List<String> paths = new ArrayList<String>();
         LivroDao livrodao = new LivroDao();
         String comando = "SELECT * FROM livros;";
-        List<Livro> livros = livrodao.getLivros(comando);
-        for (Livro livro : livros){
+        this.livros = livrodao.getLivros(comando);
+        for (Livro livro : this.livros){
             paths.add(livro.getImagem());
         }
         return paths;

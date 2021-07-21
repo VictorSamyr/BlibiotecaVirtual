@@ -3,6 +3,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 public class TelaAdmin {
     private JFrame frame;
@@ -18,6 +19,8 @@ public class TelaAdmin {
     private JTextField txtEmail;
     private UsuarioDao userDao;
     private List<JCheckBox> preferencias;
+    private DefaultTableModel modelo;
+    private JTable tabela;
 
     public TelaAdmin(){
         userDao = new UsuarioDao();
@@ -27,14 +30,14 @@ public class TelaAdmin {
     }
 
     private void configurarJanela(){
-        frame.setSize(700, 500);
+        frame.setSize(950, 500);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         mainPanel = new JPanel();
         formPanel = new JPanel();
         tablePanel = new JPanel();
         formPanel.setBounds(0, 0, 300, 500);
-        tablePanel.setBounds(280, 0, 420, 500);
+        tablePanel.setBounds(280, 0, 660, 500);
         mainPanel.setLayout(null);
         formPanel.setLayout(null);
         tablePanel.setLayout(null);
@@ -53,6 +56,7 @@ public class TelaAdmin {
         JLabel lblEmail = new JLabel("E-Mail");
         JLabel lblPreferencias = new JLabel("Preferências");
         txtId = new JTextField();
+        txtId.setEnabled(false);
         txtNome = new JTextField();
         txtLogin = new JTextField();
         txtSexo = new JTextField();
@@ -73,12 +77,11 @@ public class TelaAdmin {
         lblEmail.setFont(new Font("", Font.BOLD, 15));
         lblPreferencias.setFont(new Font("", Font.BOLD, 15));
         txtId.setBounds(35, 9, 30, 15);
-        txtNome.setBounds(63, 36, 85, 16);
-        txtLogin.setBounds(63, 61, 85, 16);
+        txtNome.setBounds(63, 36, 130, 16);
+        txtLogin.setBounds(63, 61, 130, 16);
         txtSexo.setBounds(63, 86, 15, 16);
         txtIdade.setBounds(63, 111, 30, 15);
-        txtEmail.setBounds(63, 136, 85, 16);
-        //adicionarPreferencias();
+        txtEmail.setBounds(63, 136, 130, 16);
         formPanel.add(lblId);
         formPanel.add(lblNome);
         formPanel.add(lblLogin);
@@ -96,6 +99,7 @@ public class TelaAdmin {
         generosPanel.setBounds(0, 180, 400, 150);
         generosPanel.setLayout(new GridLayout(3, 2));
         adicionarPreferencias();
+        criarTabela();
         formPanel.add(generosPanel);
     }
 
@@ -116,5 +120,20 @@ public class TelaAdmin {
         generosPanel.add(autoAjuda);
         generosPanel.add(suspense);
         generosPanel.add(historiaEmQuadrinhos);
+    }
+
+    private void criarTabela(){
+        modelo = new DefaultTableModel();
+        modelo.addColumn("ID");
+        modelo.addColumn("Nome");
+        modelo.addColumn("Login");
+        modelo.addColumn("E-Mail");
+        modelo.addColumn("Sexo");
+        modelo.addColumn("Idade");
+        modelo.addColumn("Preferências");
+        tabela = new JTable(modelo);
+        JScrollPane tablePane = new JScrollPane(tabela);
+        tablePane.setBounds(20, 50, 630, 300);
+        tablePanel.add(tablePane);
     }
 }
